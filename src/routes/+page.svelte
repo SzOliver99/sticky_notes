@@ -8,7 +8,7 @@
 			(entries) => {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
-						history.replaceState(null, null, `#${entry.target.id}`);
+						// history.replaceState(null, null, `#${entry.target.id}`);
 						activeSection = entry.target.id;
 					}
 				});
@@ -55,11 +55,9 @@
 
 <style>
 	section:not(.active) h2 {
-		@apply from-black;
 	}
 
 	.active h2 {
-		@apply sticky top-2;
-		background: linear-gradient(red, 80%, #ff00000a);
+		@apply sticky top-2 bg-opacity-50;
 	}
 </style>
