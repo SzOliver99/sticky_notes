@@ -1,12 +1,6 @@
 <script>
-	import { onMount } from 'svelte';
-
 	let count = 50;
 	let activeSection = '';
-
-	let y = 0;
-	let lastY = 0;
-	let sectionElement;
 
 	// Function to observe sections
 	function observeSections(node) {
@@ -33,33 +27,7 @@
 			}
 		};
 	}
-
-	onMount(() => {
-		sectionElement.addEventListener('scroll', function (e) {
-			alert('The scroll event only triggers when there is content to scroll.');
-		});
-	});
-
-	const scrollToTheater = (y) => {
-		let dy = lastY - y;
-		lastY = y;
-
-		// let bottom = sectionElement.getBoundingClientRect().bottom;
-		// alert(bottom);
-
-		if (dy < -10) {
-			document.body.parentNode.scrollTo({
-				top: sectionElement.offsetTop,
-				left: 0,
-				behavior: 'smooth'
-			});
-		}
-	};
-
-	$: scrollToTheater(y);
 </script>
-
-<svelte:window bind:scrollY={y} />
 
 <div id="container" class="flex flex-col bg-gray-100 m-auto rounded-xl p-4 py-2 w-4/5">
 	<h1>Lorems</h1>
@@ -69,7 +37,6 @@
 			id="lorem-{index}"
 			class={activeSection === `lorem-${index}` ? 'active' : ''}
 			use:observeSections
-			bind:this={sectionElement}
 		>
 			<h2 class="bg-[#ff0000] rounded p-2 mt-2">Lorem {index}</h2>
 			<p>
